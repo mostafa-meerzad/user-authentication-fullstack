@@ -3,7 +3,7 @@ const { User, validateAuth } = require("../models/user");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-router.post("/auth", async (req, res) => {
+router.post("/login", async (req, res) => {
   // todo: check user data
   const { error } = validateAuth(req.body);
   if (error) {

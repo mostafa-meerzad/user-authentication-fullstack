@@ -5,7 +5,7 @@ const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
   // data sent from client-side for registering the user
   // todo: validate user data sent from client-side
   // todo: look up for the user if not exists create one
