@@ -8,39 +8,67 @@ const Signup = () => {
   }
 
   const [formData, setFormData] = useState(initialFormState);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // FormData is a built-in object that provides a way to easily construct a list of key/value pairs representing the form entries and their values.
-    // e.target refers to the form element itself FormData automatically collects all the form inputs and their values that has a "name" property
-    // Object.fromEntries takes an iterator and returns a JS object
-    // formData.entries() returns an "iterator"
-    // const formData = new FormData(e.target);
-    // const userData = Object.fromEntries(formData.entries());
-    let userData = formData;
-    fetch("http://localhost:3000/api/users/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((res) => {
-        if (res.ok) {
-          setFormData(initialFormState)
-          return res.headers.get("x-auth-token");
-        } else {
-          throw new Error("Signup failed");
-        }
-      })
-      .then((token) => {
-        // console.log(token);
-        localStorage.setItem("test-auth-token", token);
-      })
-      .catch((err) => {
-        console.log("ERROR: ", err);
-      });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // FormData is a built-in object that provides a way to easily construct a list of key/value pairs representing the form entries and their values.
+  //   // e.target refers to the form element itself FormData automatically collects all the form inputs and their values that has a "name" property
+  //   // Object.fromEntries takes an iterator and returns a JS object
+  //   // formData.entries() returns an "iterator"
+  //   // const formData = new FormData(e.target);
+  //   // const userData = Object.fromEntries(formData.entries());
+  //   let userData = formData;
+  //   fetch("http://localhost:3000/api/users/signup", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(userData),
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         setFormData(initialFormState)
+  //         return res.headers.get("x-auth-token");
+  //       } else {
+  //         throw new Error("Signup failed");
+  //       }
+  //     })
+  //     .then((token) => {
+  //       // console.log(token);
+  //       localStorage.setItem("test-auth-token", token);
+  //     })
+  //     .catch((err) => {
+  //       console.log("ERROR: ", err);
+  //     });
+  // };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // console.log(formData);
+
+    try {
+      const res = await fetch("http://localhost:3000/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        const token = res.headers.get("x-auth-token");
+        localStorage.setItem("test-token", token);
+        const data = await res.text();
+        console.log(data);
+
+        setFormData({ name: "", email: "", password: "" });
+      } else {
+        console.log(await res.text());
+        console.log("this is the else block");
+      }
+    } catch (error) {
+      console.error("ERROR: => ", error);
+    }
+  };
+  
   return (
     <div>
       <h2>Signup</h2>
