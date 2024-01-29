@@ -1,9 +1,13 @@
-const Login = () => {
+const Signup = () => {
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Signup</h2>
       <br />
       <form method="POST" action="http://localhost:3000/api/users/signup">
+        <label htmlFor="name">
+          name
+          <input type="name" name="name" id="name" />
+        </label>
         <label htmlFor="email">
           email
           <input type="email" name="email" id="email" />
@@ -18,4 +22,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default Signup;

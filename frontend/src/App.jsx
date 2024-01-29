@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
 
@@ -21,6 +23,8 @@ const App = () => {
         <Link to="about">about</Link>
         <br />
         <Link to="login">login</Link>
+        <br />
+        <Link to="signup">signup</Link>
         <br />
         <Link to="somewhere else">somewhere else</Link>
       </nav>
