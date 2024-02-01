@@ -4,6 +4,8 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import PrivateRoute from "./pages/PrivateRoute";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
@@ -13,7 +15,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/signup" element={<Signup/>} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
 
@@ -25,6 +30,8 @@ const App = () => {
         <Link to="login">login</Link>
         <br />
         <Link to="signup">signup</Link>
+        <br />
+        <Link to="dashboard">dashboard</Link>
         <br />
         <Link to="somewhere else">somewhere else</Link>
       </nav>
